@@ -35,7 +35,6 @@ TYPED_TEST(TransformAndInvert_FFT, FFT_1D_xtensor) {
   // std::cout << "fourier transform of input before ifft (which is destructive!): " << a_fourier << std::endl;
   auto should_be_a = xt::fftw::ifft(a_fourier);
   assert_results_complex(a, a_fourier, should_be_a);
-  //ASSERT_TRUE(true);
 }
 
 TYPED_TEST(TransformAndInvert_FFT, FFT_2D_xarray) {
@@ -47,11 +46,11 @@ TYPED_TEST(TransformAndInvert_FFT, FFT_2D_xarray) {
   assert_results_complex(a, a_fourier, should_be_a);
 }
 
-TYPED_TEST(TransformAndInvert_FFT, FFT_3D_xtensor) {
+TYPED_TEST(TransformAndInvert_FFT, FFT_3D_xtensor_deduced_dim) {
   xt::xtensor<std::complex<TypeParam>, 3> a = generate_complex_data<TypeParam, 3>(4);
-  auto a_fourier = xt::fftw::fft<3>(a);
+  auto a_fourier = xt::fftw::fft(a);
   // std::cout << "fourier transform of input before ifft (which is destructive!): " << a_fourier << std::endl;
-  auto should_be_a = xt::fftw::ifft<3>(a_fourier);
+  auto should_be_a = xt::fftw::ifft(a_fourier);
   assert_results_complex(a, a_fourier, should_be_a);
 }
 

@@ -31,7 +31,7 @@ include(CheckCXXCompilerFlag)
 
 string(TOUPPER "${CMAKE_BUILD_TYPE}" U_CMAKE_BUILD_TYPE)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Intel")
     add_compile_options(-march=native) #-Wunused-parameter -Wextra -Wreorder -Wconversion)
@@ -96,7 +96,7 @@ include_directories(${GTEST_INCLUDE_DIRS})
 
 set(XTENSOR_FFTW_TESTS
         basic_interface_fft.cpp
-        #basic_interface_rfft.cpp
+        basic_interface_rfft.cpp
         #basic_interface_hfft.cpp
         helper.cpp
         #examples.cpp
