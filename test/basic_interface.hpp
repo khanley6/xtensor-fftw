@@ -41,7 +41,8 @@ auto generate_data(std::size_t n) {
 template <typename T, std::size_t dim>
 auto generate_complex_data(std::size_t n) {
   std::complex<T> i {0,1};
-  xt::xarray<std::complex<T>, xt::layout_type::row_major> c = generate_data<T, dim>(n) + generate_data<T, dim>(n) * i;
+  //xt::xarray<std::complex<T>, xt::layout_type::row_major> c = generate_data<T, dim>(n) + generate_data<T, dim>(n) * i;
+  xt::xtensor<std::complex<T>, dim> c = generate_data<T, dim>(n) + generate_data<T, dim>(n) * i;
   return std::move(c) / static_cast<T>(2);  // divide by 2 (sqrt(2) would be fine too) to make sure FFT doesn't go infinite
 }
 
