@@ -166,7 +166,7 @@ public:
   void TearDown(const ::benchmark::State& /*state*/) {}
 
   std::size_t data_size;
-  xt::xtensor<precision_t> a;
+  xt::xtensor<precision_t, 2> a;
 };
 
 using rfft2Dxtensor_float = rfft2Dxtensor<float>;
