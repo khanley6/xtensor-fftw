@@ -53,22 +53,9 @@ using rfft1Dxarray_float = rfft1Dxarray<float>;
 
 BENCHMARK_F(rfft1Dxarray_float, TransformAndInvert)(::benchmark::State& st) {
   while (st.KeepRunning()) {
-    auto a_fourier = xt::fftw::rfft(a);
+    auto a_fourier = xt::fftw::rfft<1>(a);
     ::benchmark::DoNotOptimize(a_fourier);
-    auto should_be_a = xt::fftw::irfft(a_fourier);
-    ::benchmark::DoNotOptimize(should_be_a);
-  }
-}
-
-////
-// Real FFT: nD with n = 1
-////
-
-BENCHMARK_F(rfft1Dxarray_float, TransformAndInvert_nD)(::benchmark::State& st) {
-  while (st.KeepRunning()) {
-    auto a_fourier = xt::fftw::rfftn<1>(a);
-    ::benchmark::DoNotOptimize(a_fourier);
-    auto should_be_a = xt::fftw::irfftn<1>(a_fourier);
+    auto should_be_a = xt::fftw::irfft<1>(a_fourier);
     ::benchmark::DoNotOptimize(should_be_a);
   }
 }
@@ -99,22 +86,9 @@ using rfft2Dxarray_float = rfft2Dxarray<float>;
 
 BENCHMARK_F(rfft2Dxarray_float, TransformAndInvert)(::benchmark::State& st) {
   while (st.KeepRunning()) {
-    auto a_fourier = xt::fftw::rfft2(a);
+    auto a_fourier = xt::fftw::rfft<2>(a);
     ::benchmark::DoNotOptimize(a_fourier);
-    auto should_be_a = xt::fftw::irfft2(a_fourier);
-    ::benchmark::DoNotOptimize(should_be_a);
-  }
-}
-
-////
-// Real FFT: nD with n = 2
-////
-
-BENCHMARK_F(rfft2Dxarray_float, TransformAndInvert_nD)(::benchmark::State& st) {
-  while (st.KeepRunning()) {
-    auto a_fourier = xt::fftw::rfftn<2>(a);
-    ::benchmark::DoNotOptimize(a_fourier);
-    auto should_be_a = xt::fftw::irfftn<2>(a_fourier);
+    auto should_be_a = xt::fftw::irfft<2>(a_fourier);
     ::benchmark::DoNotOptimize(should_be_a);
   }
 }
@@ -141,4 +115,4 @@ BENCHMARK_F(rfft2Dxarray_float, TransformAndInvert_nD)(::benchmark::State& st) {
 //#endif  // FFTW_NO_LONGDOUBLE
 
 
-BENCHMARK_MAIN()
+BENCHMARK_MAIN();
