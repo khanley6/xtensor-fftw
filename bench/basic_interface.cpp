@@ -114,5 +114,72 @@ BENCHMARK_F(rfft2Dxarray_float, TransformAndInvert)(::benchmark::State& st) {
 //}
 //#endif  // FFTW_NO_LONGDOUBLE
 
+////
+// Real FFT: 1D xtensor
+////
+
+template<typename precision_t>
+class rfft1Dxtensor : public ::benchmark::Fixture {
+public:
+  void SetUp(const ::benchmark::State& state) {
+      data_size = 1024;
+    a = generate_data<precision_t, 1>(data_size);
+
+    // let fftw accumulate wisdom
+//    auto b = xt::fftw::rfft(a);  // DOES NOT HAVE ANY NOTICEABLE EFFECT...
+//    auto c = xt::fftw::irfft(b);
+  }
+
+  void TearDown(const ::benchmark::State& /*state*/) {}
+
+  std::size_t data_size;
+  xt::xtensor<precision_t, 1> a;
+};
+
+using rfft1Dxtensor_float = rfft1Dxtensor<float>;
+
+BENCHMARK_F(rfft1Dxtensor_float, TransformAndInvert)(::benchmark::State& st) {
+  while (st.KeepRunning()) {
+    auto a_fourier = xt::fftw::rfft(a);
+    ::benchmark::DoNotOptimize(a_fourier);
+    auto should_be_a = xt::fftw::irfft(a_fourier);
+    ::benchmark::DoNotOptimize(should_be_a);
+  }
+}
+
+////
+// Real FFT: 2D xtensor
+////
+
+template<typename precision_t>
+class rfft2Dxtensor : public ::benchmark::Fixture {
+public:
+  void SetUp(const ::benchmark::State& state) {
+    data_size = 64;
+    a = generate_data<precision_t, 2>(data_size);
+
+    // let fftw accumulate wisdom
+//    auto b = xt::fftw::rfft(a);  // DOES NOT HAVE ANY NOTICEABLE EFFECT...
+//    auto c = xt::fftw::irfft(b);
+  }
+
+  void TearDown(const ::benchmark::State& /*state*/) {}
+
+  std::size_t data_size;
+  xt::xtensor<precision_t> a;
+};
+
+using rfft2Dxtensor_float = rfft2Dxtensor<float>;
+
+BENCHMARK_F(rfft2Dxtensor_float, TransformAndInvert)(::benchmark::State& st) {
+  while (st.KeepRunning()) {
+    auto a_fourier = xt::fftw::rfft(a);
+    ::benchmark::DoNotOptimize(a_fourier);
+    auto should_be_a = xt::fftw::irfft(a_fourier);
+    ::benchmark::DoNotOptimize(should_be_a);
+  }
+}
+
+
 
 BENCHMARK_MAIN();
