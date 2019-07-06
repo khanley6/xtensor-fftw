@@ -95,9 +95,9 @@ include_directories(${XTENSOR_FFTW_INCLUDE_DIR})
 include_directories(${GTEST_INCLUDE_DIRS})
 
 set(XTENSOR_FFTW_TESTS
-        basic_interface_fft.cpp
-        basic_interface_rfft.cpp
-        #basic_interface_hfft.cpp
+        #basic_interface_fft.cpp
+        #basic_interface_rfft.cpp
+        basic_interface_hfft.cpp
         helper.cpp
         #examples.cpp
 )

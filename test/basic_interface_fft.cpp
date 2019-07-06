@@ -31,9 +31,9 @@ TYPED_TEST_CASE(TransformAndInvert_FFT, MyTypes);
 
 TYPED_TEST(TransformAndInvert_FFT, FFT_1D_xtensor) {
   xt::xtensor<std::complex<TypeParam>, 1> a = generate_complex_data<TypeParam, 1>(4);
-  auto a_fourier = xt::fftw::fft(a);
+  auto a_fourier = xt::fftw::fft<1>(a);
   // std::cout << "fourier transform of input before ifft (which is destructive!): " << a_fourier << std::endl;
-  auto should_be_a = xt::fftw::ifft(a_fourier);
+  auto should_be_a = xt::fftw::ifft<1>(a_fourier);
   assert_results_complex(a, a_fourier, should_be_a);
 }
 
