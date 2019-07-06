@@ -12,6 +12,7 @@
 #
 # Adaptation from GoogleTest to Google Benchmark:
 # Copyright (c) 2017, Patrick Bos
+# Copyright (c) 2019, Kenneth Hanley
 #
 ############################################################################
 
@@ -32,7 +33,7 @@ include(CheckCXXCompilerFlag)
 
 #string(TOUPPER "${CMAKE_BUILD_TYPE}" U_CMAKE_BUILD_TYPE)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 #if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Intel")
 #    add_compile_options(-march=native) #-Wunused-parameter -Wextra -Wreorder -Wconversion)

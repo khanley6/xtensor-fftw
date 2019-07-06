@@ -4,6 +4,9 @@
  * Distributed under the terms of the BSD 3-Clause License.
  *
  * The full license is in the file LICENSE, distributed with this software.
+ *
+ * Modifications:
+ * Copyright (c) 2019, Kenneth Hanley
  */
 
 // real life examples
@@ -25,8 +28,8 @@
 TEST(examples, sin_derivative) {
   // generate a sinusoid field
   double dx = M_PI/100;
-  xt::xarray<double> x = xt::arange(0., 2*M_PI, dx);
-  xt::xarray<double> sin = xt::sin(x);
+  xt::xtensor<double, 1> x = xt::arange(0., 2*M_PI, dx);
+  xt::xtensor<double, 1> sin = xt::sin(x);
 
   // transform to Fourier space
   auto sin_fs = xt::fftw::rfft(sin);
@@ -37,7 +40,7 @@ TEST(examples, sin_derivative) {
   xt::xarray< std::complex<double> > sin_derivative_fs = xt::eval(i * k * sin_fs);
 
   // transform back to normal space
-  auto sin_derivative = xt::fftw::irfft(sin_derivative_fs);
+  auto sin_derivative = xt::fftw::irfft<1>(sin_derivative_fs);
 
   EXPECT_TRUE(xt::allclose(xt::cos(x), sin_derivative));
 //  std::cout << "x:              " << x << std::endl;

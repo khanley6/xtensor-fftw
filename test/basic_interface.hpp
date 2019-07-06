@@ -4,6 +4,9 @@
  * Distributed under the terms of the BSD 3-Clause License.
  *
  * The full license is in the file LICENSE, distributed with this software.
+ *
+ * Modifications:
+ * Copyright (c) 2019, Kenneth Hanley
  */
 
 #ifndef XTENSOR_FFTW_BASIC_INTERFACE_HPP
@@ -47,14 +50,16 @@ auto generate_complex_data(std::size_t n) {
 }
 
 template <
-    typename T, std::size_t dim,
-    typename xt::xarray<T> (&hfft) (const xt::xarray<std::complex<T> > &),
-    typename xt::xarray<std::complex<T> > (&ihfft) (const xt::xarray<T> &)
+    typename T, std::size_t dim //,
+    //typename xt::xarray<T> (&hfft) (const xt::xarray<std::complex<T> > &),
+    //typename xt::xarray<std::complex<T> > (&ihfft) (const xt::xarray<T> &)
 >
 auto generate_hermitian_data(std::size_t n) {
-  xt::xarray<std::complex<T>, xt::layout_type::row_major> c = generate_complex_data<T, dim>(n);
-  auto c_fourier = hfft(c);
-  auto c_hermitian = ihfft(c_fourier);
+  xt::xtensor<std::complex<T>, dim> c = generate_complex_data<T, dim>(n);
+  //auto c_fourier = hfft(c);
+  //auto c_hermitian = ihfft(c_fourier);
+  auto c_fourier = xt::fftw::hfft<dim>(c);
+  auto c_hermitian = xt::fftw::ihfft<dim>(c_fourier);
   return std::move(c_hermitian) / static_cast<T>(10);  // divide away the FFT infinities (hopefully)
 }
 

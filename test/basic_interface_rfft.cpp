@@ -5,10 +5,12 @@
  * Distributed under the terms of the BSD 3-Clause License.
  *
  * The full license is in the file LICENSE, distributed with this software.
+ *
+ * Modifications:
+ * Copyright (c) 2019, Kenneth Hanley
  */
 
 #include <xtensor-fftw/basic.hpp>
-#include <xtensor/xio.hpp>
 #include "basic_interface.hpp"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -20,7 +22,6 @@ template <typename T>
 class TransformAndInvert_realFFT : public ::testing::Test {};
 
 TYPED_TEST_CASE(TransformAndInvert_realFFT, MyTypes);
-//TYPED_TEST_CASE(TransformAndInvert_realFFT, double);
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -35,9 +36,6 @@ TYPED_TEST(TransformAndInvert_realFFT, realFFT_1D_xtensor) {
   auto a_fourier = xt::fftw::rfft(a);
   // std::cout << "fourier transform of input before ifft (which is destructive!): " << a_fourier << std::endl;
   auto should_be_a = xt::fftw::irfft(a_fourier);
-  std::cout << "even a = " << a << std::endl;
-  std::cout << "even a_fourier = " << a_fourier << std::endl;
-  std::cout << "even should_be_a = " << should_be_a << std::endl;
   assert_results(a, a_fourier, should_be_a);
 }
 

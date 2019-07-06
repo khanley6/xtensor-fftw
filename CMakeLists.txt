@@ -8,6 +8,7 @@
 #
 # Modifications:
 # - Copyright 2017 Johan Mabille (rpath fix)
+# - Copyright 2019 Kenneth Hanley (C++ standard update)
 #
 
 cmake_minimum_required(VERSION 3.1.3)  # 3.1.3 for set(CMAKE_CXX_STANDARD 14)

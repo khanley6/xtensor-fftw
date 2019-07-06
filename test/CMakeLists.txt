@@ -12,6 +12,7 @@
 #
 # Modifications:
 # Copyright (c) 2017, Patrick Bos
+# Copyright (c) 2019, Kenneth Hanley
 #
 ############################################################################
 
@@ -95,11 +96,11 @@ include_directories(${XTENSOR_FFTW_INCLUDE_DIR})
 include_directories(${GTEST_INCLUDE_DIRS})
 
 set(XTENSOR_FFTW_TESTS
-        #basic_interface_fft.cpp
-        #basic_interface_rfft.cpp
+        basic_interface_fft.cpp
+        basic_interface_rfft.cpp
         basic_interface_hfft.cpp
         helper.cpp
-        #examples.cpp
+        examples.cpp
 )
 
 set(XTENSOR_FFTW_TARGET test_xtensor-fftw)
